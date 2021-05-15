@@ -13,7 +13,7 @@ Resources:
     Properties:
       Handler: index.handler
       Runtime: nodejs12.x
-      CodeUri: s3://lambda-artifacts-b28e2df55f0f2409/f1ab9199f0f70ac1804360f7edefabca
+      CodeUri: s3://lambda-artifacts-b28e2df55f0f2409/25c85926fc9a01eae23680e637ff7cc4
       Description: Call the AWS Lambda API
       Timeout: 10
       Policies:
