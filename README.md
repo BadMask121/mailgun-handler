@@ -3,6 +3,15 @@ This function sends Simple notification message to customers on mailgun email ev
 ## GET STARTED
 run `yarn` to install dependencies
 
+For saving the mailgun event dump we use firebase and you must update your service key in
+    `/function/services/storage/mailgun/firebase/receeve-service-account.json`
+
+To add other storage services add your code to
+    `function/services/storage/mailgun/`
+    
+and then create a attach your provider which should inherit the `MailGunStorageClass` abstract   class to the `MailGunStorageService` code in 
+    `function/services/storage/mailgun/index.ts` file
+
 ## Deployment
 Make sure to run test script with `yarn test` and make sure all test passed before deployment
 
