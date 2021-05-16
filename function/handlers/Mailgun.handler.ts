@@ -31,19 +31,19 @@ export default async (event: any, context: any) => {
     const mailgunStorage = new MailGunStorageService("firebase");
     await mailgunStorage.save(body);
 
-    // send sms notification
-    const notification = new NotificationService("aws");
-    const payload = {
-      Provider: "Mailgun",
-      timestamp: eventBody.timestamp,
-      type: `email ${eventBody.event}`,
-    };
+    if (process.env.AWS_SNS_TOPIC) {
+      // send sms notification
+      const notification = new NotificationService("aws");
+      const payload = {
+        Provider: "Mailgun",
+        timestamp: eventBody.timestamp,
+        type: `email ${eventBody.event}`,
+      };
 
-    if (process.env.AWS_SNS_TOPIC)
       notification.send(JSON.stringify(payload), {
         topic: process.env.AWS_SNS_TOPIC || "",
       });
-
+    }
     return formatResponse(serialize(body));
   } catch (error) {
     return formatError(error);
