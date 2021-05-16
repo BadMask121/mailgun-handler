@@ -18,6 +18,7 @@
     "firebase-admin": "^9.8.0"
   },
   "scripts": {
-    "test": "jest"
+    "test": "REGION=$(aws configure get region) && export AWS_REGION=$REGION && export MAILGUN_SIGNING_KEY=ffddc2cec4657c3c2b8136acb9def32b-602cc1bf-f69c4a34 && AWS_SNS_TOPIC=arn:aws:sns:us-east-2:419287194037:EmailEvent && jest",
+    "deploy": "yarn test && rm -rf dist && tsc && ./2-deploy.sh"
   }
 }

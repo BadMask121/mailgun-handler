@@ -13,17 +13,27 @@ export class AwsProvider extends NotificationServiceClass {
 
     // Set region
     lambda.config.update({ region: process.env.AWS_REGION });
-    this.sns = new AWS.SNS();
+    this.sns = new AWS.SNS({ region: process.env.AWS_REGION });
   }
 
+  /**
+   * Sends messages through aws sns service and @returns a response
+   * @param message
+   * @param options
+   * @returns
+   */
   async send(
     message: string,
-    options: NotificationOptions<AWS.SNS.PublishInput>
+    options?: NotificationOptions<Omit<AWS.SNS.PublishInput, "Message">>
   ) {
-    var params = {
+    const params = {
       Message: message /* required */,
-      TopicArn: options.topic,
+      TopicArn: options?.topic,
+      ...options,
     };
+    // deleting generic topic object to prevent aws throughing error as this property isnt supported
+    // in future i'll find a better way to handle this
+    Reflect.deleteProperty(params, "topic");
 
     const publish = this.sns
       .publish(params)

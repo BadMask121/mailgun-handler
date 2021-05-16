@@ -1,6 +1,6 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
-Description: An AWS Lambda application that calls the Lambda API.
+Description: An AWS Lambda application dumps and send sns messages to customers
 Resources:
   api:
     Type: AWS::Serverless::Api
@@ -13,7 +13,7 @@ Resources:
     Properties:
       Handler: index.handler
       Runtime: nodejs12.x
-      CodeUri: s3://lambda-artifacts-b28e2df55f0f2409/25c85926fc9a01eae23680e637ff7cc4
+      CodeUri: s3://lambda-artifacts-b28e2df55f0f2409/15a8f8d02657f561b86f69dc535e0429
       Description: Call the AWS Lambda API
       Timeout: 10
       Policies:
@@ -28,4 +28,4 @@ Resources:
             RestApiId:
               Ref: api
             Path: /
-            Method: GET
+            Method: POST

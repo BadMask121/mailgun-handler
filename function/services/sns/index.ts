@@ -5,7 +5,6 @@ import {
   NotificationOptions,
 } from "./NotifcationServiceClass";
 
-// TODO: write test and create proper type definitions
 export class NotificationService {
   protected provider: NotificationServiceClass;
   constructor(provider?: NotificationProvider) {

@@ -30,10 +30,6 @@ export const formatError = function (error: AWS.AWSError) {
   };
   return response;
 };
-// Use SDK client
-export const getAccountSettings = function () {
-  return lambda.getAccountSettings().promise();
-};
 
 export const serialize = function (object: any) {
   return JSON.stringify(object, null, 2);

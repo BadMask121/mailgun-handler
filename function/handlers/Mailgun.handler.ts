@@ -7,8 +7,6 @@ import {
 import { MailGunStorageService } from "../services/storage";
 import { NotificationService } from "../services/sns/index";
 
-const testKey = "ffddc2cec4657c3c2b8136acb9def32b-602cc1bf-f69c4a34";
-
 export default async (event: any, context: any) => {
   try {
     const body =
@@ -24,7 +22,7 @@ export default async (event: any, context: any) => {
 
     const isValidRequest = verifyMailgunRequest({
       ...signature,
-      signingKey: process.env.MAILGUN_SIGNING_KEY || (testKey as string),
+      signingKey: process.env.MAILGUN_SIGNING_KEY as string,
     });
 
     if (!isValidRequest) throw new Error("Unauthorized requests");
@@ -41,9 +39,11 @@ export default async (event: any, context: any) => {
       type: `email ${eventBody.event}`,
     };
 
-    notification.send(JSON.stringify(payload), {
-      topic: process.env.AWS_SNS_TOPIC || "",
-    });
+    if (process.env.AWS_SNS_TOPIC)
+      notification.send(JSON.stringify(payload), {
+        topic: process.env.AWS_SNS_TOPIC || "",
+      });
+
     return formatResponse(serialize(body));
   } catch (error) {
     return formatError(error);

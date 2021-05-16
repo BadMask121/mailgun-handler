@@ -1,6 +1,6 @@
 AWSTemplateFormatVersion: '2010-09-09'
 Transform: 'AWS::Serverless-2016-10-31'
-Description: An AWS Lambda application that calls the Lambda API.
+Description: An AWS Lambda application dumps and send sns messages to customers
 Resources:
   api:
     Type: AWS::Serverless::Api
@@ -28,4 +28,4 @@ Resources:
           Properties:
             RestApiId: !Ref api
             Path: /
-            Method: GET
+            Method: POST

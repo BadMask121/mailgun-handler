@@ -13,6 +13,6 @@ test("Run formatResponse test", async () => {
 });
 
 test("Run serialize test", async () => {
-  const response = serialize(JSON.stringify({ test: "hello" }));
+  const response = serialize({ test: "hello" });
   expect(response).toContain("hello");
 });

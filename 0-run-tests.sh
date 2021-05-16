@@ -5,4 +5,5 @@ if [ ! -d node_modules ]; then
   npm install
 fi
 REGION=$(aws configure get region)
-AWS_REGION=$REGION npm run test
+export AWS_REGION=$REGION
+npm run test
