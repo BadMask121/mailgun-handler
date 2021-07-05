@@ -1,12 +1,12 @@
-export type MailGunProviders = "firebase" | "pgsql";
-export type MailGunEvent = "opened" | "clicked" | "delivered";
+export type MailGunProviders = 'firebase' | 'pgsql';
+export type MailGunEvent = 'opened' | 'clicked' | 'delivered';
 export interface MailGunBody {
   signature: {
     timestamp: string | number;
     token: string;
     signature: string;
   };
-  "event-data": {
+  'event-data': {
     event: MailGunEvent;
     timestamp: number;
     id: string;

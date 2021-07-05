@@ -1,10 +1,10 @@
-import AWS from "aws-sdk";
+import AWS from 'aws-sdk';
 
-import { lambda } from "../../../helpers";
+import { lambda } from '../../../helpers';
 import {
   NotificationOptions,
   NotificationServiceClass,
-} from "../NotifcationServiceClass";
+} from '../NotifcationServiceClass';
 
 export class AwsProvider extends NotificationServiceClass {
   protected sns: AWS.SNS;
@@ -24,7 +24,7 @@ export class AwsProvider extends NotificationServiceClass {
    */
   async send(
     message: string,
-    options?: NotificationOptions<Omit<AWS.SNS.PublishInput, "Message">>
+    options?: NotificationOptions<Omit<AWS.SNS.PublishInput, 'Message'>>
   ) {
     const params = {
       Message: message /* required */,
@@ -33,7 +33,7 @@ export class AwsProvider extends NotificationServiceClass {
     };
     // deleting generic topic object to prevent aws throughing error as this property isnt supported
     // in future i'll find a better way to handle this
-    Reflect.deleteProperty(params, "topic");
+    Reflect.deleteProperty(params, 'topic');
 
     const publish = this.sns
       .publish(params)
