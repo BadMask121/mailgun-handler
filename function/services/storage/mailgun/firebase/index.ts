@@ -19,12 +19,12 @@ export class FirebaseProvider extends MailGunServiceClass {
     this.db = admin.firestore();
   }
 
-  async saveRaw(body: MailGunBody): Promise<string> {
+  async saveRaw(body: MailGunBody): Promise<string | null> {
     try {
       const result = await this.db.collection("MAILGUN_DUMP").add(body);
       if (result) return result.id;
 
-      return null as unknown as string;
+      return null;
     } catch (error) {
       throw new MailGunServiceError(error);
     }
